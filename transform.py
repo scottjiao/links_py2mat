@@ -1,13 +1,7 @@
-
-
-
-
-
 import numpy as np
 import h5py
 from scipy.sparse import csr_matrix
 import argparse
-
 
 parser = argparse.ArgumentParser(description='from edgelist to matlab file')
 parser.add_argument('--input_link_file_name', type=str, default="edgelist.train.txt",
@@ -15,7 +9,6 @@ parser.add_argument('--input_link_file_name', type=str, default="edgelist.train.
 parser.add_argument('--output_mat_file_name', type=str, default="result.mat",
                     help='output mat file name')
 args = parser.parse_args()
-
 
 input_link_file_name= args.input_link_file_name
 output_mat_file_name= args.output_mat_file_name
@@ -98,4 +91,9 @@ P = get_transition_matrix(A, Dout)
 # write group A and P, dataset Dout and Din into matlab .mat file
 import scipy.io as sio
 print("write to matlab file")
+#all double type
+A= A.astype(np.float64)
+P= P.astype(np.float64)
+Dout= Dout.astype(np.float64)
+Din= Din.astype(np.float64)
 sio.savemat(output_mat_file_name, {'A': A, 'P': P, 'Dout': Dout, 'Din': Din})

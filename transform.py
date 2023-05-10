@@ -1,7 +1,13 @@
+
+
+
+
+
 import numpy as np
 import h5py
 from scipy.sparse import csr_matrix
 import argparse
+
 
 parser = argparse.ArgumentParser(description='from edgelist to matlab file')
 parser.add_argument('--input_link_file_name', type=str, default="edgelist.train.txt",
@@ -9,6 +15,7 @@ parser.add_argument('--input_link_file_name', type=str, default="edgelist.train.
 parser.add_argument('--output_mat_file_name', type=str, default="result.mat",
                     help='output mat file name')
 args = parser.parse_args()
+
 
 input_link_file_name= args.input_link_file_name
 output_mat_file_name= args.output_mat_file_name
@@ -66,7 +73,7 @@ A = build_adjacency_matrix_sparse(links, num_nodes)
 print("get degree vectors------------------")
 # get out degree
 def get_out_degree(A):
-    return np.sum(A, axis=1)
+    return np.sum(A, axis=1).T
 # get in degree
 def get_in_degree(A):
     return np.sum(A, axis=0)
